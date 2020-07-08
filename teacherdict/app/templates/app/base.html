@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+    <script src="{% static 'app/js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'app/js/popper.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap-select.min.js' %}"></script>
+    <title>Tech Test</title>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'index' %}">Teacher Directory</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-success" href="{% url 'index' %}">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-success" href="{% url 'listTeachers' %}">Search <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-success" href="{% url 'upload' %}">Upload CSV <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li> -->
+                    <!-- <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li> -->
+                    <!-- <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+                </ul>
+                <!-- <form class="form-inline my-2 my-lg-0"> -->
+                <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+                {% if user.is_authenticated %}
+                <button class="btn btn-success">{{user.username}}</button>
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="/logout">Logout</a>
+                {% else %}
+                <a class="btn btn-outline-success my-2 my-sm-0" href="/login">Login</a>
+                {% endif %}
+                <!-- </form> -->
+            </div>
+        </nav>
+        <div class="card">
+            <div class="card-body">
+
+                {% block content %}
+
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

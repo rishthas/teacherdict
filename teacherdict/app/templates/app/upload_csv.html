@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="card-title">Upload CSV</h1>
+{% for message in messages %}
+  <div class="alert {% if message.tags == 'error' %}
+    alert-danger
+    {% else %}
+    alert-success
+    {% endif %}
+  alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   
+    {{ message }}
+  </div>
+{% endfor %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+      <div class="input-group mb-3">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="file" name="file">
+          <label class="custom-file-label" for="file">Choose file</label>
+        </div>
+        <div class="input-group-append">
+          <!-- <span class="input-group-text" id="">Upload</span> -->
+          <button type="submit" class="btn btn-success">Upload</button>
+        </div>
+      </div>    
+</form>
+
+{% else %}
+<br>
+<hr>
+<p><a href="/login">Please login</a></p>
+{% endif %}
+
+{% endblock %}

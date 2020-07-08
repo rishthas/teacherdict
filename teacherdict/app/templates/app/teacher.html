@@ -1,0 +1,51 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1 class="card-title">Teacher Detail </h1>
+<hr>
+<table class="table table-striped table-hover">
+
+    <tbody>
+        <tr>
+            <td> <strong>First Name </strong></td>
+            <td>{{ teacher.first_name }}</td>
+            <td><strong>Last Name</strong></td>
+            <td>{{ teacher.last_name }}</td>
+            <td rowspan="3">
+                {% if teacher.profil_pic %}
+                <img src="{{ teacher.profil_pic.url }}" class="img-thumbnail" height="200px">
+                {% else %}
+                <img src="/media/pictures/placeholder-icon.jpg" alt="..." class="img-thumbnail" height="200px">
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td> <strong>Email Id </strong></td>
+            <td>{{ teacher.email_id }}</td>
+            <td><strong>Phone Number</strong></td>
+            <td>{{ teacher.phone_no }}</td>
+
+        </tr>
+        <tr>
+            <td> <strong>Subjects</strong></td>
+            <td colspan="3">
+                {% for subject in teacher.subjects.all%}
+                {{subject}},
+                {% endfor %}
+
+            </td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+{% else %}
+<br>
+<hr>
+<p><a href="/login">Please login</a></p>
+{% endif %}
+
+{% endblock %}
